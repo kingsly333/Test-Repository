@@ -11,6 +11,7 @@ Bootstrap repo, then research official exam guides (CCA-F, PL-300, GitHub Founda
 |---|---|---|
 | 2026-10-05 | Repo initialised (main) | — |
 | 2026-10-05 | Baseline commit (.gitignore, CLAUDE.md, workflow_state.md) | b1ff3f7 |
+| 2026-10-05 | Phased plan (docs/plan.md), CCA-F moved to Sat 2026-11-28, rules updated | 60bb21b |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
