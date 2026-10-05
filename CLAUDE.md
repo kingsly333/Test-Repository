@@ -25,10 +25,13 @@ Kingsly Jayanthan, Chief of Staff, Nimida Group (Bangalore). Beginner-friendly s
 - Plan source of truth: `docs/plan.md` (to be created). Progress source of truth: the app database, not markdown.
 
 ## Dates
-- Plan start: Mon 2026-10-05. CCA-F exam: Sun 2026-11-15 (last day of week 6). Hard deadline.
-- Last full mock exam must finish by Thu 2026-11-12, leaving a 2-day review buffer.
+- Plan start: Mon 2026-10-05. Full phased plan: `docs/plan.md` (draft, 20 weeks).
+- CCA-F exam: moved from Sun 2026-11-15 to Sat 2026-11-28 (proposed, user to confirm). Last mock done by Wed 2026-11-25.
+- Sundays light (10 min quiz only), Tuesdays off. Free windows: 10-11:30 pm or 11 am-2:30 pm.
+- CDR block is not treated as a blocker for this plan (user instruction). Never delete or edit existing Google Calendar events without asking.
+- Tests: short 10-15 min quizzes on alternate days (Mon, Wed, Fri, Sun).
 
 ## Open questions
-- Weekly study hours (not yet given).
+- Capacity: 3-4 hrs/week (given 2026-10-05). Whether 6 weeks is enough for all topics: see workflow_state.md Decisions.
 - Exam dates for PL-300 and GitHub Foundations (not yet given; only CCA-F is fixed).
 - Merge with Quick Hits app or keep separate.
