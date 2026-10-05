@@ -1,0 +1,55 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+token.json
+client_secret*.json
+.vercel
+
+# Data files (progress, question banks with personal data, exports)
+data/
+*.csv
+*.xlsx
+*.xls
+*.sqlite
+*.sqlite3
+*.db
+*.json.bak
+
+# Power BI
+cache.abf
+localSettings.json
+*.pbix.bak
+.pbi/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Cache / OS / editor
+.cache/
+.turbo/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
