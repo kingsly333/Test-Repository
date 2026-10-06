@@ -1,10 +1,10 @@
 # Workflow State
 
 ## Current Task
-Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Then approve docs/app-design.md before Phase 4.
+Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Phase 3 (cited question bank) is blocked on that. App v0 (local-first) exists on branch feature/app-scaffold; cloud login/sync still to build.
 
 ## Last Session
-2026-10-06: Week-by-week schedule with re-test dates and scoring system added to docs/plan.md. App design drafted in docs/app-design.md (Canvas-style UI, Google sign-in allowlist, topics as data). UIUX/ screenshots kept out of git. Branch docs/plan-and-design (not merged).
+2026-10-06: Merged docs/plan-and-design into main (5e9fa22). Built app v0 on feature/app-scaffold: Next.js 16 + Tailwind 4 PWA with Today, Plan, Quiz, Labs, Progress, Topics screens, scoring, Thu/Sat auto-reschedule, add-topic with timeline impact, JSON export/import. Progress stored in browser localStorage via src/lib/store.ts (swap point for Supabase). Quiz bank is empty by design (Rule 5). Lint, tsc and build pass; all routes 200. Visual check done on desktop Today only (screenshot tool blocked by an extension).
 
 ## Task Log
 | Date | Item | Commit |
@@ -13,13 +13,15 @@ Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundation
 | 2026-10-05 | Baseline commit (.gitignore, CLAUDE.md, workflow_state.md) | b1ff3f7 |
 | 2026-10-05 | Phased plan (docs/plan.md), CCA-F moved to Sat 2026-11-28, rules updated | 60bb21b |
 | 2026-10-06 | Week schedule, scoring, app design; UIUX/ ignored (branch docs/plan-and-design) | 66bb7fd |
+| 2026-10-06 | Merge docs/plan-and-design into main | 5e9fa22 |
+| 2026-10-06 | App v0 scaffold + 6 screens (branch feature/app-scaffold) | see git log |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
 - [ ] Phase 1: Research exam guides, define syllabus per topic
-- [ ] Phase 2: 6-week plan approved (docs/plan.md)
+- [x] Phase 2: Plan approved (docs/plan.md, merged 5e9fa22)
 - [ ] Phase 3: Question bank (cited, generated once)
-- [ ] Phase 4: App scaffold (Next.js + Tailwind PWA)
+- [~] Phase 4: App scaffold done (v0, local storage). Remaining: Google sign-in + Supabase, service worker/offline, phone-width visual check
 - [ ] Phase 5: Google Calendar sync + progress store
 - [ ] Phase 6: "What next" nudges (calendar + Gmail digest, push if PWA installed)
 - [ ] Phase 7: Deploy to Vercel
@@ -40,3 +42,6 @@ Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundation
 - 2026-10-06: UI modelled on Canvas LMS layout (no branding). Login = Google sign-in + single-account allowlist, Supabase RLS.
 - 2026-10-06: Topics stored as data so more can be added; app shows timeline impact before adding.
 - 2026-10-06: UIUX/ excluded from git (screenshots contain name + bookmarks).
+- 2026-10-06: User approved design and told me to merge and build. Built local-first first because Supabase/Google OAuth need accounts only the user can create.
+- 2026-10-06: Next 16 ships AGENTS.md: read node_modules/next/dist/docs before writing Next code (APIs differ from older versions).
+- 2026-10-06: Plan data lives in src/data/plan.ts and must stay in sync with docs/plan.md. GitHub Foundations domains left empty until official guide is read (not invented).
