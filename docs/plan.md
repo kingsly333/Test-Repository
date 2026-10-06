@@ -45,6 +45,8 @@ CDR is NOT treated as a blocker in this plan (user instruction). Its hours are n
 
 Topics are data in the app: more can be added later (see docs/app-design.md). Each new topic extends the timeline at fixed 3-4 hrs/week.
 
+Tool labs (Fridays, W1-W6): 3 VS Code agent + 3 Antigravity (~7.5 hrs, matches the Phase 1 estimate). Python is a 6th topic added 2026-10-06: not scheduled yet, needs a goal and hours; it will queue after PL-300 (from Feb 22) unless you say otherwise.
+
 ## Review rule
 - Sunday quiz re-tests that week's topic.
 - Spaced re-tests: each topic returns at +1 week and +3 weeks (dates below).
@@ -55,12 +57,12 @@ Domain weights marked * are unverified (third-party or memory). Verify against o
 ## Phase 1: CCA-F + Antigravity + VS Code (Oct 5 - Nov 29)
 | Week | Dates | Topic (weight*) | Lab | Re-tests |
 |---|---|---|---|---|
-| W1 | Oct 5-11 | Exam guide + Claude Code config (20%) | - | Oct 18, Nov 1 |
-| W2 | Oct 12-18 | Diagnostic test + Agentic architecture pt 1 (27%) | - | Oct 25, Nov 8 |
+| W1 | Oct 5-11 | Exam guide + Claude Code config (20%) | VS Code agent: setup | Oct 18, Nov 1 |
+| W2 | Oct 12-18 | Diagnostic test + Agentic architecture pt 1 (27%) | Antigravity: setup | Oct 25, Nov 8 |
 | W3 | Oct 19-25 | Agentic architecture pt 2 | Antigravity | Nov 1, Nov 15 |
-| W4 | Oct 26-Nov 1 | Tool design + MCP (18%) | - | Nov 8, Nov 22 |
+| W4 | Oct 26-Nov 1 | Tool design + MCP (18%) | VS Code agent: tools + MCP | Nov 8, Nov 22 |
 | W5 | Nov 2-8 | Prompt engineering + structured output (20%) | VS Code agent | Nov 15, Nov 22 |
-| W6 | Nov 9-15 | Context management + reliability (15%) | - | Nov 22, Nov 25 |
+| W6 | Nov 9-15 | Context management + reliability (15%) | Antigravity: small project | Nov 22, Nov 25 |
 | W7 | Nov 16-22 | Mock 1 (Fri Nov 20), fix weak domains | - | - |
 | W8 | Nov 23-29 | Mock 2 by Wed Nov 25, light review | - | EXAM Sat Nov 28 |
 

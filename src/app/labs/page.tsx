@@ -9,7 +9,7 @@ import { Card, H1 } from "@/components/ui";
 export default function Labs() {
   const hydrated = useHydrated();
   const state = useStore();
-  if (!hydrated) return <H1>Labs</H1>;
+  if (!hydrated) return <div className="h-96" />;
 
   return (
     <>

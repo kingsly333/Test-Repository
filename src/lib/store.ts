@@ -34,10 +34,11 @@ export interface State {
   labs: Record<string, boolean[]>;
   notes: Record<string, string>;
   extraTopics: ExtraTopic[];
+  filter: string; // topic switcher: "all" or a topic id
 }
 
 const KEY = "study-planner:v1";
-const EMPTY: State = { sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [] };
+const EMPTY: State = { sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [], filter: "all" };
 
 let cache: State | null = null;
 const listeners = new Set<() => void>();
@@ -129,6 +130,10 @@ export function addTopic(t: ExtraTopic) {
 export function removeTopic(id: string) {
   const s = snapshot();
   commit({ ...s, extraTopics: s.extraTopics.filter((t) => t.id !== id) });
+}
+
+export function setFilter(filter: string) {
+  commit({ ...snapshot(), filter });
 }
 
 export function exportJson(): string {

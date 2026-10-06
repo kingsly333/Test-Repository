@@ -5,13 +5,14 @@ import { exportJson, importJson, useStore } from "@/lib/store";
 import { readiness } from "@/lib/scoring";
 import { useHydrated } from "@/lib/hydrated";
 import { Bar, Btn, Card, H1, StatusPill } from "@/components/ui";
+import { TopicTabs } from "@/components/TopicTabs";
 
 const BAR_COLOR = { green: "bg-green-500", amber: "bg-amber-500", red: "bg-red-500" };
 
 export default function Progress() {
   const hydrated = useHydrated();
   const state = useStore();
-  if (!hydrated) return <H1>Progress</H1>;
+  if (!hydrated) return <div className="h-96" />;
 
   function download() {
     const url = URL.createObjectURL(new Blob([exportJson()], { type: "application/json" }));
@@ -36,13 +37,17 @@ export default function Progress() {
 
   return (
     <>
-      <H1>Progress</H1>
+      <H1 sub="Readiness, domain mastery and quiz history">Progress</H1>
+      <TopicTabs />
       <p className="mb-4 text-sm text-muted">
         {doneCount} sessions done · {state.quizzes.length} quiz results saved
       </p>
 
+      {state.filter !== "all" && !TOPICS.some((t) => t.id === state.filter && t.kind === "certification") && (
+        <Card className="mb-4 text-sm text-muted">This topic has no exam. Its progress is the lab checklist on the Labs screen.</Card>
+      )}
       <div className="space-y-4">
-        {TOPICS.filter((t) => t.kind === "certification").map((t) => {
+        {TOPICS.filter((t) => t.kind === "certification" && (state.filter === "all" || state.filter === t.id)).map((t) => {
           const r = readiness(t, state.quizzes);
           return (
             <Card key={t.id}>

@@ -4,7 +4,9 @@
 Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Phase 3 (cited question bank) is blocked on that. App v0 (local-first) exists on branch feature/app-scaffold; cloud login/sync still to build.
 
 ## Last Session
-2026-10-06: Merged docs/plan-and-design into main (5e9fa22). Built app v0 on feature/app-scaffold: Next.js 16 + Tailwind 4 PWA with Today, Plan, Quiz, Labs, Progress, Topics screens, scoring, Thu/Sat auto-reschedule, add-topic with timeline impact, JSON export/import. Progress stored in browser localStorage via src/lib/store.ts (swap point for Supabase). Quiz bank is empty by design (Rule 5). Lint, tsc and build pass; all routes 200. Visual check done on desktop Today only (screenshot tool blocked by an extension).
+2026-10-06 (later): User feedback: next-day sessions not visible, UI poor, topic switcher missing (VS Code, Antigravity, Power BI, Python, Git + GitHub). Fixed on feature/app-scaffold: day picker (week strip + Today/Tomorrow), topic switcher chips on Today/Plan/Progress, Topics cards per topic, coloured session cards, restyled shell. Tool labs now on 6 Phase 1 Fridays (3 VS Code, 3 Antigravity). Python added as unscheduled topic. Verified with headless Chrome screenshots (desktop + phone width).
+
+Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). Built app v0 on feature/app-scaffold: Next.js 16 + Tailwind 4 PWA with Today, Plan, Quiz, Labs, Progress, Topics screens, scoring, Thu/Sat auto-reschedule, add-topic with timeline impact, JSON export/import. Progress stored in browser localStorage via src/lib/store.ts (swap point for Supabase). Quiz bank is empty by design (Rule 5). Lint, tsc and build pass; all routes 200. Visual check done on desktop Today only (screenshot tool blocked by an extension).
 
 ## Task Log
 | Date | Item | Commit |
@@ -27,6 +29,8 @@ Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundation
 - [ ] Phase 7: Deploy to Vercel
 
 ## Decisions
+- 2026-10-06: Python added as a topic (user expected it). Not scheduled: needs goal + hours. Default would queue after PL-300.
+- 2026-10-06: Tool labs expanded to 6 Phase 1 Fridays to make VS Code and Antigravity real tracks (fits the ~7h in the plan).
 - 2026-10-05: Topics = CCA-F, Power BI, Git + GitHub, Antigravity, VS Code agent vibe coding.
 - 2026-10-05: Certifications wherever applicable (PL-300, GitHub Foundations likely; verify).
 - 2026-10-05: Form = PWA on Vercel. Sync = Google Calendar events.

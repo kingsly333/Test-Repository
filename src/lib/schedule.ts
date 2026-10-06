@@ -36,7 +36,8 @@ export const SESSIONS: Session[] = WEEKS.flatMap((w) => {
           title: `Mock exam: ${w.title}`, detail: "Full mock under exam conditions, then review",
         }
       : {
-          ...base, id: `W${w.n}.3`, kind: "lab", date: addDays(mon, 4), slot: MIDDAY, minutes: 90,
+          ...base, topicId: w.lab ? w.lab.id : w.topicId,
+          id: `W${w.n}.3`, kind: "lab", date: addDays(mon, 4), slot: MIDDAY, minutes: 90,
           title: w.lab ? w.lab.name : `Practice: ${w.title}`,
           detail: "75 min hands-on + 15 min quiz",
         },

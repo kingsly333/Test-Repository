@@ -2,11 +2,16 @@ import type { Status } from "@/lib/scoring";
 import { STATUS_LABEL } from "@/lib/scoring";
 
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`rounded-lg border border-line bg-surface p-4 ${className}`}>{children}</div>;
+  return <div className={`rounded-xl border border-line bg-surface p-4 shadow-sm ${className}`}>{children}</div>;
 }
 
-export function H1({ children }: { children: React.ReactNode }) {
-  return <h1 className="text-2xl font-light mb-6">{children}</h1>;
+export function H1({ children, sub }: { children: React.ReactNode; sub?: string }) {
+  return (
+    <div className="mb-5">
+      <h1 className="text-3xl font-semibold tracking-tight">{children}</h1>
+      {sub && <p className="mt-1 text-muted">{sub}</p>}
+    </div>
+  );
 }
 
 export function Btn({
@@ -19,13 +24,13 @@ export function Btn({
 }) {
   const style =
     kind === "primary"
-      ? "bg-accent text-white"
-      : "border border-line text-foreground hover:bg-line/40";
+      ? "bg-accent text-white shadow-sm hover:opacity-90"
+      : "border border-line bg-surface text-foreground hover:bg-line/50";
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`rounded px-3 py-1.5 text-sm disabled:opacity-40 ${style}`}
+      className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition disabled:opacity-40 ${style}`}
     >
       {children}
     </button>
@@ -36,8 +41,8 @@ const DOT: Record<Status, string> = { green: "bg-green-500", amber: "bg-amber-50
 
 export function StatusPill({ status }: { status: Status }) {
   return (
-    <span className="inline-flex items-center gap-1.5 text-sm">
-      <span className={`h-2.5 w-2.5 rounded-full ${DOT[status]}`} />
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-line/50 px-2.5 py-1 text-xs font-medium">
+      <span className={`h-2 w-2 rounded-full ${DOT[status]}`} />
       {STATUS_LABEL[status]}
     </span>
   );
@@ -45,8 +50,8 @@ export function StatusPill({ status }: { status: Status }) {
 
 export function Bar({ value, className = "bg-accent" }: { value: number; className?: string }) {
   return (
-    <div className="h-2 w-full rounded bg-line">
-      <div className={`h-2 rounded ${className}`} style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
+    <div className="h-2 w-full rounded-full bg-line">
+      <div className={`h-2 rounded-full ${className}`} style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
     </div>
   );
 }
