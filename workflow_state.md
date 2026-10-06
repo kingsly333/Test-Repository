@@ -14,7 +14,7 @@ Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundation
 | 2026-10-05 | Phased plan (docs/plan.md), CCA-F moved to Sat 2026-11-28, rules updated | 60bb21b |
 | 2026-10-06 | Week schedule, scoring, app design; UIUX/ ignored (branch docs/plan-and-design) | 66bb7fd |
 | 2026-10-06 | Merge docs/plan-and-design into main | 5e9fa22 |
-| 2026-10-06 | App v0 scaffold + 6 screens (branch feature/app-scaffold) | see git log |
+| 2026-10-06 | App v0 scaffold + 6 screens (branch feature/app-scaffold) | 937183c |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
