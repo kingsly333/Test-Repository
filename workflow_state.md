@@ -1,10 +1,10 @@
 # Workflow State
 
 ## Current Task
-Bootstrap repo, then research official exam guides (CCA-F, PL-300, GitHub Foundations) and draft the 6-week plan for approval. No app code yet.
+Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Then approve docs/app-design.md before Phase 4.
 
 ## Last Session
-2026-10-05: Created `D:\study-planner`, ran `git init`, wrote `.gitignore`, `CLAUDE.md`, `workflow_state.md`. Baseline commit pending user review of `.gitignore`.
+2026-10-06: Week-by-week schedule with re-test dates and scoring system added to docs/plan.md. App design drafted in docs/app-design.md (Canvas-style UI, Google sign-in allowlist, topics as data). UIUX/ screenshots kept out of git. Branch docs/plan-and-design (not merged).
 
 ## Task Log
 | Date | Item | Commit |
@@ -12,6 +12,7 @@ Bootstrap repo, then research official exam guides (CCA-F, PL-300, GitHub Founda
 | 2026-10-05 | Repo initialised (main) | — |
 | 2026-10-05 | Baseline commit (.gitignore, CLAUDE.md, workflow_state.md) | b1ff3f7 |
 | 2026-10-05 | Phased plan (docs/plan.md), CCA-F moved to Sat 2026-11-28, rules updated | 60bb21b |
+| 2026-10-06 | Week schedule, scoring, app design; UIUX/ ignored (branch docs/plan-and-design) | 66bb7fd |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
@@ -34,3 +35,8 @@ Bootstrap repo, then research official exam guides (CCA-F, PL-300, GitHub Founda
 - 2026-10-05: Availability: evenings 10-11:30 pm or days 11 am-2:30 pm, Sundays minimal, Tuesday off. Saturday 9-1:30 is CDR.
 - 2026-10-05: User approved phases and Sat 2026-11-28 CCA-F date (exam booking not yet checked). Tests changed to short 10-15 min quizzes on alternate days (Mon/Wed/Fri/Sun). CDR block ignored as a blocker for planning; existing calendar events left untouched.
 - 2026-10-05: No remote added. Ask before adding one.
+- 2026-10-06: CCA-F partner-eligibility requirement noted; user said ignore it for planning.
+- 2026-10-06: Scoring = domain mastery (last 3, latest x2) -> readiness = sum(weight x mastery). Green 80+ (no domain <70), amber 65-79, red <65. Exam-go = green on both mocks.
+- 2026-10-06: UI modelled on Canvas LMS layout (no branding). Login = Google sign-in + single-account allowlist, Supabase RLS.
+- 2026-10-06: Topics stored as data so more can be added; app shows timeline impact before adding.
+- 2026-10-06: UIUX/ excluded from git (screenshots contain name + bookmarks).
