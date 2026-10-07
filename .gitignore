@@ -14,7 +14,7 @@ client_secret*.json
 UIUX/
 
 # Data files (progress, question banks with personal data, exports)
-data/
+/data/
 *.csv
 *.xlsx
 *.xls
