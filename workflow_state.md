@@ -28,6 +28,7 @@ Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). B
 | 2026-10-06 | Day picker, topic switcher, UI refresh | 9d391a7 |
 | 2026-10-07 | Module detail page, ignore docs/sources/ | e5b5507 |
 | 2026-10-07 | Stuck list feature (branch feature/stuck-list) | ea72fb5 |
+| 2026-10-07 | Per-item Ask Claude + NotebookLM links on stuck list | e6a9282 |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
