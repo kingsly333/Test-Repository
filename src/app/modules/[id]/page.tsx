@@ -10,6 +10,7 @@ import { effectiveDate, markDone, markMissed, setNote, undo, useStore } from "@/
 import { pretty, today } from "@/lib/dates";
 import { useHydrated } from "@/lib/hydrated";
 import { Btn, Card } from "@/components/ui";
+import { StuckForm } from "@/components/StuckForm";
 
 // Which official preparation exercise (Exam Guide section 8) fits which session.
 const EXERCISE_FOR: Record<string, string> = { "W1.2": "E2", "W3.2": "E4", "W4.2": "E1", "W5.2": "E3" };
@@ -196,6 +197,7 @@ export default function ModulePage({ params }: { params: Promise<{ id: string }>
           {done && <Btn onClick={() => undo(id)}>Undo done</Btn>}
           {done && <span className="self-center text-sm text-green-600">✓ done</span>}
           {!actionable && !done && <span className="self-center text-xs text-muted">Actions open on the day.</span>}
+          <StuckForm topicId={s.topicId} sessionId={id} />
         </div>
       </Card>
     </>

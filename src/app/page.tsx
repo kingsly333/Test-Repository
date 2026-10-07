@@ -9,6 +9,7 @@ import { readiness } from "@/lib/scoring";
 import { TOPICS } from "@/data/plan";
 import { useHydrated } from "@/lib/hydrated";
 import { Btn, Card, StatusPill } from "@/components/ui";
+import { StuckForm } from "@/components/StuckForm";
 import { TopicTabs, allTopics } from "@/components/TopicTabs";
 
 const WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -149,6 +150,7 @@ export default function Today() {
                     {actionable && <Btn kind="primary" onClick={() => markDone(i.s.id)}>Done</Btn>}
                     {actionable && <Btn onClick={() => markMissed(i.s.id, i.date)}>Didn&apos;t happen</Btn>}
                     {done && <Btn onClick={() => undo(i.s.id)}>Undo</Btn>}
+                    {(actionable || done || featured) && <StuckForm topicId={i.s.topicId} sessionId={i.s.id} />}
                     {!actionable && !done && <span className="text-xs text-muted">Planned. Actions open on the day.</span>}
                     {featured && (i.s.kind === "quiz" || i.s.kind === "learn") && (
                       <Link href="/quiz" className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-line/40">Take a quiz</Link>

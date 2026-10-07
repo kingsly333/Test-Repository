@@ -28,17 +28,27 @@ export interface ExtraTopic {
   examDate?: string;
 }
 
+export interface StuckItem {
+  id: string;
+  topicId: string;
+  sessionId?: string; // where it came up, if from a session
+  text: string; // what I didn't understand
+  at: string; // ISO timestamp
+  resolvedAt?: string;
+}
+
 export interface State {
   sessions: Record<string, SessionRecord>;
   quizzes: QuizAttempt[];
   labs: Record<string, boolean[]>;
   notes: Record<string, string>;
   extraTopics: ExtraTopic[];
+  stuck: StuckItem[];
   filter: string; // topic switcher: "all" or a topic id
 }
 
 const KEY = "study-planner:v1";
-const EMPTY: State = { sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [], filter: "all" };
+const EMPTY: State = { sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [], stuck: [], filter: "all" };
 
 let cache: State | null = null;
 const listeners = new Set<() => void>();
@@ -130,6 +140,29 @@ export function addTopic(t: ExtraTopic) {
 export function removeTopic(id: string) {
   const s = snapshot();
   commit({ ...s, extraTopics: s.extraTopics.filter((t) => t.id !== id) });
+}
+
+export function addStuck(item: { topicId: string; sessionId?: string; text: string }) {
+  const s = snapshot();
+  const text = item.text.trim();
+  if (!text) return;
+  const entry: StuckItem = { id: `s-${Date.now()}`, ...item, text, at: new Date().toISOString() };
+  commit({ ...s, stuck: [...s.stuck, entry] });
+}
+
+export function resolveStuck(id: string, resolved: boolean) {
+  const s = snapshot();
+  commit({
+    ...s,
+    stuck: s.stuck.map((x) =>
+      x.id === id ? { ...x, resolvedAt: resolved ? new Date().toISOString() : undefined } : x,
+    ),
+  });
+}
+
+export function removeStuck(id: string) {
+  const s = snapshot();
+  commit({ ...s, stuck: s.stuck.filter((x) => x.id !== id) });
 }
 
 export function setFilter(filter: string) {
