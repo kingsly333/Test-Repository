@@ -37,7 +37,14 @@ export interface StuckItem {
   resolvedAt?: string;
 }
 
+/** Latest result per question id, so quizzes can prefer unseen and previously missed questions. */
+export interface AnswerRecord {
+  ok: boolean;
+  at: string;
+}
+
 export interface State {
+  answered: Record<string, AnswerRecord>;
   sessions: Record<string, SessionRecord>;
   quizzes: QuizAttempt[];
   labs: Record<string, boolean[]>;
@@ -48,7 +55,7 @@ export interface State {
 }
 
 const KEY = "study-planner:v1";
-const EMPTY: State = { sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [], stuck: [], filter: "all" };
+const EMPTY: State = { answered: {}, sessions: {}, quizzes: [], labs: {}, notes: {}, extraTopics: [], stuck: [], filter: "all" };
 
 let cache: State | null = null;
 const listeners = new Set<() => void>();
@@ -118,6 +125,14 @@ export function undo(id: string) {
 export function recordQuiz(attempts: QuizAttempt[]) {
   const s = snapshot();
   commit({ ...s, quizzes: [...s.quizzes, ...attempts] });
+}
+
+export function recordAnswers(results: { id: string; ok: boolean }[]) {
+  const s = snapshot();
+  const at = new Date().toISOString();
+  const answered = { ...s.answered };
+  results.forEach((r) => { answered[r.id] = { ok: r.ok, at }; });
+  commit({ ...s, answered });
 }
 
 export function setLabItem(labId: string, index: number, value: boolean) {
