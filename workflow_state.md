@@ -1,12 +1,14 @@
 # Workflow State
 
 ## Current Task
-Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Phase 3 (cited question bank) is blocked on that. App v0 (local-first) exists on branch feature/app-scaffold; cloud login/sync still to build.
+All three official exam guides are read and domain weights verified. Question banks exist for CCA-F (42), PL-300 (39) and GH-900 (32). App v0 (local-first) lives on feature branches; cloud login/sync still to build. Work is on feature/quiz-bank, stacked on feature/stuck-list on feature/app-scaffold; none merged to main yet.
 
 ## Next Step
-Phase 1: download the official CCA-F exam guide PDF into docs/sources/ (git-ignored), verify the domain weights, and fill them into src/data/plan.ts. Then repeat for PL-300 and GitHub Foundations.
+Click-test the quiz in a browser (`npm run dev`, open /quiz): run a 10-question Practice set for each of CCA-F, Power BI and Git + GitHub, finish one in Exam mode, and report anything that looks wrong. Then decide: merge the three feature branches into main (ask before any push or remote).
 
 ## Last Session
+2026-10-07 (banks): Fetched the official PL-300 (skills as of 2026-04-20) and GH-900 (as of Jan 2026) study guides from Microsoft Learn. PL-300 weights verified (midpoints 27.5/27.5/27.5/17.5); GitHub Foundations got 7 domains (midpoints, sum 92.5, readiness normalises). Wrote 39 PL-300 and 32 GH-900 original questions (src/data/questions-pl300.ts, questions-gh900.ts), each citing its skills-measured line plus a docs page; all 72 citation URLs returned HTTP 200 and 3 risky claims were spot-checked against their pages. Quiz: answer order shuffled at serve time; relearn list works for skills lines. FOUND: .gitignore `data/` hid src/data, so plan/modules/question banks were never in git; user chose to track src/data, rule changed to `/data/` (8f309bf). Lint, tsc, build pass; not click-tested in a browser.
+
 2026-10-07 (quiz): Built feature/quiz-bank (branched from feature/stuck-list). 42 original CCA-F questions in src/data/questions-ccaf.ts (D1 11, D2 8, D3 8, D4 8, D5 7; 4 select-2), each cited to its exam-guide task statement + docs link. Quiz screen: scenario card, progress bar, practice/exam modes, answer reveal with explanation, results with per-domain bars, relearn list (task statement + module link), add-missed-to-stuck. Answer history prefers unseen/missed questions. PL-300 and GitHub Foundations banks still empty (guides not loaded). Lint, tsc, build pass; bank validated by script; not click-tested in a browser.
 
 2026-10-07 (later): Built stuck list on branch feature/stuck-list: "Didn't get it" button on Today cards and module pages, /stuck page (add, clear, delete, export markdown, NotebookLM and Claude Code prompts). Stored in localStorage `stuck`. Lint, tsc, build pass; routes 200. Not done: re-serving stuck-topic questions in quizzes (question bank is empty). Not merged to main yet. Netlify hosting requested; user to run CLI steps (CLAUDE.md still says Vercel).
@@ -31,13 +33,15 @@ Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). B
 | 2026-10-07 | Module detail page, ignore docs/sources/ | e5b5507 |
 | 2026-10-07 | Stuck list feature (branch feature/stuck-list) | ea72fb5 |
 | 2026-10-07 | Per-item Ask Claude + NotebookLM links on stuck list | e6a9282 |
-| 2026-10-07 | CCA-F question bank (42, cited) + exam-style quiz screen (branch feature/quiz-bank) | 56085e1 |
+| 2026-10-07 | CCA-F question bank (42, cited) + exam-style quiz screen (branch feature/quiz-bank). NOTE: src/data was git-ignored then, so the bank itself was not in this commit | 56085e1 |
+| 2026-10-07 | Quiz relearn for skills lines + serve-time answer shuffle (PL-300/GH-900 banks in next commit) | 744df5a |
+| 2026-10-07 | Track src/data (ignore rule narrowed to /data/): plan, modules, python and all 3 question banks (CCA-F 42, PL-300 39, GH-900 32) | 8f309bf |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
-- [ ] Phase 1: Research exam guides, define syllabus per topic
+- [~] Phase 1: Exam guides read for CCA-F, PL-300, GH-900 (weights verified). Remaining: study resources for Antigravity / VS Code agents / Python
 - [x] Phase 2: Plan approved (docs/plan.md, merged 5e9fa22)
-- [ ] Phase 3: Question bank (cited, generated once)
+- [~] Phase 3: Question banks stored and cited: CCA-F 42, PL-300 39, GH-900 32. Remaining: ~20 more CCA-F for a full 60-item mock; hands-on tests for Antigravity / VS Code
 - [~] Phase 4: App scaffold done (v0, local storage). Remaining: Google sign-in + Supabase, service worker/offline, phone-width visual check
 - [ ] Phase 5: Google Calendar sync + progress store
 - [ ] Phase 6: "What next" nudges (calendar + Gmail digest, push if PWA installed)
@@ -63,4 +67,6 @@ Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). B
 - 2026-10-06: UIUX/ excluded from git (screenshots contain name + bookmarks).
 - 2026-10-06: User approved design and told me to merge and build. Built local-first first because Supabase/Google OAuth need accounts only the user can create.
 - 2026-10-06: Next 16 ships AGENTS.md: read node_modules/next/dist/docs before writing Next code (APIs differ from older versions).
-- 2026-10-06: Plan data lives in src/data/plan.ts and must stay in sync with docs/plan.md. GitHub Foundations domains left empty until official guide is read (not invented).
+- 2026-10-06: Plan data lives in src/data/plan.ts and must stay in sync with docs/plan.md. GitHub Foundations domains left empty until official guide is read (not invented). Superseded 2026-10-07: guide read, 7 domains added.
+- 2026-10-07: User chose to track src/data in git (it is app source, not personal data). .gitignore now ignores only a root /data/. Rule 3 still applies to progress exports, .env, cache.abf and localSettings.json.
+- 2026-10-07: Question order/answer order is shuffled at serve time only; stored banks are not regenerated (Rule 8).
