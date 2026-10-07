@@ -56,3 +56,6 @@ desktop.ini
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# Downloaded official source documents (not ours to redistribute)
+docs/sources/

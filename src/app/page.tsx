@@ -145,6 +145,7 @@ export default function Today() {
                   )}
 
                   <div className="mt-3 flex flex-wrap gap-2">
+                    <Link href={`/modules/${i.s.id}`} className="rounded-lg bg-foreground px-3.5 py-1.5 text-sm font-medium text-background hover:opacity-90">Open module</Link>
                     {actionable && <Btn kind="primary" onClick={() => markDone(i.s.id)}>Done</Btn>}
                     {actionable && <Btn onClick={() => markMissed(i.s.id, i.date)}>Didn&apos;t happen</Btn>}
                     {done && <Btn onClick={() => undo(i.s.id)}>Undo</Btn>}

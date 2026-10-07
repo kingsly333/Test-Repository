@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { PLAN_START, WEEKS } from "@/data/plan";
 import { SESSIONS } from "@/lib/schedule";
 import { effectiveDate, undo, useStore } from "@/lib/store";
@@ -72,7 +73,8 @@ export default function Plan() {
                         <div className="flex min-w-0 flex-1 items-center justify-between gap-3 p-3">
                           <span className={st === "done" ? "text-muted line-through" : ""}>
                             <span className="mr-2">{st === "done" ? "✓" : st === "missed" ? "↻" : "○"}</span>
-                            <span className="text-muted">{s.id}</span> · {s.title}
+                            <span className="text-muted">{s.id}</span> ·{" "}
+                            <Link href={`/modules/${s.id}`} className="hover:underline">{s.title}</Link>
                             {sc && sc.id !== w.topicId && (
                               <span className="ml-2 rounded-full px-2 py-0.5 text-[11px] font-medium text-white" style={{ backgroundColor: sc.color }}>{sc.short}</span>
                             )}
