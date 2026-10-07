@@ -27,6 +27,15 @@ const CLAUDE_PROMPT =
   "Read docs/stuck.md. For each item: explain it in plain steps, give one hands-on lab I can run, " +
   "and write 2 check questions with an official source link each. Save to docs/deep-dives/<topic>.md.";
 
+/** Pre-filled question for one stuck item. Asks for sources (Rule 5) and honesty about gaps. */
+function itemPrompt(i: StuckItem, names: Record<string, string>): string {
+  return (
+    `I'm a beginner studying ${names[i.topicId] ?? i.topicId}. I didn't understand: "${i.text}". ` +
+    "Explain it in simple steps with one example. Link the official documentation for every claim. " +
+    "Then give me 2 check questions with answers and sources. If you are unsure of something, say so."
+  );
+}
+
 export default function Stuck() {
   const hydrated = useHydrated();
   const state = useStore();
@@ -69,7 +78,27 @@ export default function Stuck() {
           {i.sessionId && ` · ${i.sessionId}`} · {pretty(i.at.slice(0, 10))}
         </div>
       </div>
-      <div className="flex shrink-0 gap-2">
+      <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+        {!i.resolvedAt && (
+          <>
+            <a
+              href={`https://claude.ai/new?q=${encodeURIComponent(itemPrompt(i, names))}`}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg border border-line px-3.5 py-1.5 text-sm font-medium hover:bg-line/50"
+            >
+              Ask Claude ↗
+            </a>
+            <Btn
+              onClick={async () => {
+                await copy("Question copied. Paste it in your NotebookLM notebook.", itemPrompt(i, names));
+                window.open("https://notebooklm.google.com", "_blank", "noopener");
+              }}
+            >
+              NotebookLM ↗
+            </Btn>
+          </>
+        )}
         <Btn onClick={() => resolveStuck(i.id, !i.resolvedAt)}>{i.resolvedAt ? "Reopen" : "Got it"}</Btn>
         <button onClick={() => removeStuck(i.id)} className="text-xs text-muted underline">delete</button>
       </div>
@@ -80,6 +109,8 @@ export default function Stuck() {
     <>
       <H1 sub="Things I didn't understand. Log them, then deep-dive in a batch.">Stuck list</H1>
       <TopicTabs />
+
+      {copied && <p className="mb-4 rounded-lg bg-accent/10 px-3 py-2 text-sm">{copied}</p>}
 
       <Card className="mb-6">
         <div className="grid gap-3 sm:grid-cols-4">
