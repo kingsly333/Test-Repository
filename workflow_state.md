@@ -3,7 +3,13 @@
 ## Current Task
 Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundations), verify domain weights, pick study resources. Phase 3 (cited question bank) is blocked on that. App v0 (local-first) exists on branch feature/app-scaffold; cloud login/sync still to build.
 
+## Next Step
+Phase 1: download the official CCA-F exam guide PDF into docs/sources/ (git-ignored), verify the domain weights, and fill them into src/data/plan.ts. Then repeat for PL-300 and GitHub Foundations.
+
 ## Last Session
+2026-10-07: Committed pending work on feature/app-scaffold (module detail page src/app/modules/[id], docs/sources/ git-ignored). Logged SHAs; added this Next Step section.
+
+Earlier:
 2026-10-06 (later): User feedback: next-day sessions not visible, UI poor, topic switcher missing (VS Code, Antigravity, Power BI, Python, Git + GitHub). Fixed on feature/app-scaffold: day picker (week strip + Today/Tomorrow), topic switcher chips on Today/Plan/Progress, Topics cards per topic, coloured session cards, restyled shell. Tool labs now on 6 Phase 1 Fridays (3 VS Code, 3 Antigravity). Python added as unscheduled topic. Verified with headless Chrome screenshots (desktop + phone width).
 
 Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). Built app v0 on feature/app-scaffold: Next.js 16 + Tailwind 4 PWA with Today, Plan, Quiz, Labs, Progress, Topics screens, scoring, Thu/Sat auto-reschedule, add-topic with timeline impact, JSON export/import. Progress stored in browser localStorage via src/lib/store.ts (swap point for Supabase). Quiz bank is empty by design (Rule 5). Lint, tsc and build pass; all routes 200. Visual check done on desktop Today only (screenshot tool blocked by an extension).
@@ -17,6 +23,8 @@ Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). B
 | 2026-10-06 | Week schedule, scoring, app design; UIUX/ ignored (branch docs/plan-and-design) | 66bb7fd |
 | 2026-10-06 | Merge docs/plan-and-design into main | 5e9fa22 |
 | 2026-10-06 | App v0 scaffold + 6 screens (branch feature/app-scaffold) | 937183c |
+| 2026-10-06 | Day picker, topic switcher, UI refresh | 9d391a7 |
+| 2026-10-07 | Module detail page, ignore docs/sources/ | e5b5507 |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
