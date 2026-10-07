@@ -26,9 +26,19 @@ function sessionFor(taskId?: string): string | undefined {
 function pickQuestions(bank: Question[], count: number, answered: Record<string, { ok: boolean }>): Question[] {
   const rank = (q: Question) => (!answered[q.id] ? 0 : answered[q.id].ok ? 2 : 1);
   const shuffled = [...bank].sort(() => Math.random() - 0.5).sort((a, b) => rank(a) - rank(b));
-  const chosen = shuffled.slice(0, count);
+  const chosen = shuffled.slice(0, count).map(shuffleChoices);
   const order = Object.keys(SCENARIOS);
   return chosen.sort((a, b) => order.indexOf(a.scenarioId ?? "") - order.indexOf(b.scenarioId ?? ""));
+}
+
+/** Random answer order at serve time, so the correct answer is not always in the same slot. */
+function shuffleChoices(q: Question): Question {
+  const order = q.choices.map((_, i) => i).sort(() => Math.random() - 0.5);
+  return {
+    ...q,
+    choices: order.map((i) => q.choices[i]),
+    answer: q.answer.map((a) => order.indexOf(a)),
+  };
 }
 
 export default function Quiz() {
@@ -118,12 +128,13 @@ export default function Quiz() {
     })
     .filter((r) => r.total > 0)
     .sort((a, b) => (a.pct ?? 0) - (b.pct ?? 0));
+  // Group misses by the official task statement (CCA-F) or skills-measured line (PL-300, GH-900).
   const relearn = Object.values(
     results
-      .filter((r) => !r.ok && r.q.taskId)
-      .reduce<Record<string, { taskId: string; missed: number }>>((acc, r) => {
-        const id = r.q.taskId!;
-        acc[id] = { taskId: id, missed: (acc[id]?.missed ?? 0) + 1 };
+      .filter((r) => !r.ok)
+      .reduce<Record<string, { key: string; q: Question; missed: number }>>((acc, r) => {
+        const key = r.q.taskId ?? r.q.skill ?? r.q.id;
+        acc[key] = { key, q: r.q, missed: (acc[key]?.missed ?? 0) + 1 };
         return acc;
       }, {}),
   ).sort((a, b) => b.missed - a.missed);
@@ -304,17 +315,20 @@ export default function Quiz() {
               <Card className="text-sm">Nothing missed. Run another set to cover unseen questions.</Card>
             ) : (
               <div className="space-y-2">
-                {relearn.map(({ taskId, missed }) => {
-                  const t = TASK_BY_ID[taskId];
-                  const sid = sessionFor(taskId);
+                {relearn.map(({ key, q: rq, missed }) => {
+                  const task = rq.taskId ? TASK_BY_ID[rq.taskId] : undefined;
+                  const sid = sessionFor(rq.taskId);
                   return (
-                    <Card key={taskId}>
-                      <div className="text-sm font-medium">Task {taskId}: {t.title}</div>
+                    <Card key={key}>
+                      <div className="text-sm font-medium">
+                        {task ? `Task ${rq.taskId}: ${task.title}` : rq.skill}
+                      </div>
                       <div className="mt-1 text-xs text-muted">
-                        Missed {missed} {missed === 1 ? "question" : "questions"}. Source: CCA-F Exam Guide v1.0, task {taskId}.
+                        Missed {missed} {missed === 1 ? "question" : "questions"}. Source: {rq.source.label}
                       </div>
                       <div className="mt-2 flex flex-wrap gap-3 text-sm">
                         {sid && <Link href={`/modules/${sid}`} className="text-accent underline">Re-read in module {sid}</Link>}
+                        <a href={rq.source.url} target="_blank" rel="noreferrer" className="text-accent underline">Official docs ↗</a>
                       </div>
                     </Card>
                   );
@@ -351,7 +365,7 @@ export default function Quiz() {
                       <Btn
                         disabled={stuckAdded.includes(rq.id)}
                         onClick={() => {
-                          addStuck({ topicId, text: `Missed quiz question (task ${rq.taskId}): ${rq.prompt.slice(0, 120)}` });
+                          addStuck({ topicId, text: `Missed quiz question (${rq.taskId ? `task ${rq.taskId}` : rq.skill}): ${rq.prompt.slice(0, 120)}` });
                           setStuckAdded([...stuckAdded, rq.id]);
                         }}
                       >
