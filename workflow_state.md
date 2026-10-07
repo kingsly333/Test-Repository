@@ -7,6 +7,8 @@ Phase 1 research: get official exam guides (CCA-F PDF, PL-300, GitHub Foundation
 Phase 1: download the official CCA-F exam guide PDF into docs/sources/ (git-ignored), verify the domain weights, and fill them into src/data/plan.ts. Then repeat for PL-300 and GitHub Foundations.
 
 ## Last Session
+2026-10-07 (quiz): Built feature/quiz-bank (branched from feature/stuck-list). 42 original CCA-F questions in src/data/questions-ccaf.ts (D1 11, D2 8, D3 8, D4 8, D5 7; 4 select-2), each cited to its exam-guide task statement + docs link. Quiz screen: scenario card, progress bar, practice/exam modes, answer reveal with explanation, results with per-domain bars, relearn list (task statement + module link), add-missed-to-stuck. Answer history prefers unseen/missed questions. PL-300 and GitHub Foundations banks still empty (guides not loaded). Lint, tsc, build pass; bank validated by script; not click-tested in a browser.
+
 2026-10-07 (later): Built stuck list on branch feature/stuck-list: "Didn't get it" button on Today cards and module pages, /stuck page (add, clear, delete, export markdown, NotebookLM and Claude Code prompts). Stored in localStorage `stuck`. Lint, tsc, build pass; routes 200. Not done: re-serving stuck-topic questions in quizzes (question bank is empty). Not merged to main yet. Netlify hosting requested; user to run CLI steps (CLAUDE.md still says Vercel).
 
 2026-10-07: Committed pending work on feature/app-scaffold (module detail page src/app/modules/[id], docs/sources/ git-ignored). Logged SHAs; added this Next Step section.
@@ -29,6 +31,7 @@ Earlier same day: 2026-10-06: Merged docs/plan-and-design into main (5e9fa22). B
 | 2026-10-07 | Module detail page, ignore docs/sources/ | e5b5507 |
 | 2026-10-07 | Stuck list feature (branch feature/stuck-list) | ea72fb5 |
 | 2026-10-07 | Per-item Ask Claude + NotebookLM links on stuck list | e6a9282 |
+| 2026-10-07 | CCA-F question bank (42, cited) + exam-style quiz screen (branch feature/quiz-bank) | 56085e1 |
 
 ## Phase Checkpoints
 - [x] Phase 0: Bootstrap (git, .gitignore, CLAUDE.md, workflow_state.md, baseline commit b1ff3f7)
